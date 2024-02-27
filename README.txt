@@ -18,3 +18,6 @@ access of any NNTP server through your favourite web browser.
 2. Configuration
 After you have extracted all the files, you can configure Web-News by editting
 config/webnews.cfg file.
+
+Ported to PHP8 by arf20 <arf20@arf20.com> 2024
+
