@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	This PHP script is licensed under the GPL
 
@@ -18,7 +18,7 @@
 
 		// Constructor
 		// $message stores the raw MIME message (header + body)
-		function MIME_Message($message) {
+		function __construct($message) {
 			$this->MIME_message = array();
 			$this->content_map = array();
 			unset($this->main_header);
@@ -64,7 +64,7 @@
 		function decode_header($headers) {
 			$header_want = "/^(From|Subject|Date|Newsgroups|References|Message-ID|Content-Type|Content-Transfer-Encoding|Content-Disposition|Content-ID): (.*$)/i";
 			
-			$headers = split("\r\n", $headers);
+			$headers = explode("\r\n", $headers);
 
 			// Parse the header
 			for ($line_count = 0; $line_count < sizeof($headers);$line_count++) {
@@ -88,7 +88,7 @@
 
 		// An article is a raw MIME message
 		function decode_article($article) {
-			list($header, $body) = split("\r\n\r\n", $article, 2);
+			list($header, $body) = explode("\r\n\r\n", $article, 2);
 						
 			$header = $this->decode_header($header);
 

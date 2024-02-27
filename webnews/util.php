@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	This PHP script is licensed under the GPL
 
@@ -57,13 +57,13 @@
 		if (is_non_ASCII($str)) {
 			$result = "=?ISO-8859-1?Q?";
 			for ($i = 0;$i < strlen($str);$i++) {
-				$ascii = ord($str{$i});
+				$ascii = ord($str[$i]);
 				if ($ascii == 0x20) {	// Space
 					$result .= "_";
 				} else if (($ascii == 0x3D) || ($ascii == 0x3F) || ($ascii == 0x5F) || ($ascii > 0x7F)) {	// =, ?, _, 8 bit
 					$result .= "=".dechex($ascii);
 				} else {
-					$result .= $str{$i};
+					$result .= $str[$i];
 				}
 			}
 			$result .= "?=";
@@ -77,7 +77,7 @@
 	
 	function is_non_ASCII($str) {
 		for ($i = 0;$i < strlen($str);$i++) {
-			if (ord($str{$i}) > 0x7f) {
+			if (ord($str[$i]) > 0x7f) {
 				return true;
 			}
 		}
@@ -392,8 +392,8 @@
 			if (strlen($buf) == 0) {
 				continue;
 			}
-			if ($buf{0} != ';') {	// Skip the comment
-				if ($buf{0} == '['){
+			if ($buf[0] != ';') {	// Skip the comment
+				if ($buf[0] == '['){
 					if ($section) {
 						$pos = strpos($buf, ']');
 						if (!$pos) {
@@ -403,7 +403,7 @@
 						$ini[$section_name] = array();
 					}
 				} else if (strpos($buf, "=") !== FALSE) {
-					list($key, $value) = split("=", $buf, 2);
+					list($key, $value) = explode("=", $buf, 2);
 					$value = preg_replace("/^(['|\"])?(.*?)(?(1)['|\"])$/", "\\2", trim($value));
 
 					if ((strlen($key) != 0) && (strlen($value) != 0)) {					

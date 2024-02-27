@@ -1,4 +1,4 @@
-<?
+<?php
 /*		
 	This PHP script is licensed under the GPL
 
@@ -10,6 +10,7 @@
 
 	$content = 4;
 	$title = "Newsgroup";
+	$change_mpp = TRUE;
 
 	// Import the NNTP Utility
 	require("webnews/nntp.php");
@@ -21,7 +22,7 @@
 	// Start the session before output anything
 	session_name($session_name);
 	session_start();
-
+	
 	if (is_requested("set")) {	// Save the advanced options into cookies
 		$expire = 2147483647;	// Maximum integer
 		setcookie("wn_pref_lang", get_request("language"), $expire);
@@ -87,9 +88,15 @@
 	}
 
 	// Create the NNTP object
+	//print("server: ".$nntp_server);
 	$nntp = new NNTP($nntp_server, $user, $pass, $proxy_server, $proxy_port, $proxy_user, $proxy_pass);
 	// The quit() function will be called when the script terminate.
-	register_shutdown_function(create_function('', 'global $nntp; $nntp->quit();'));
+	function on_shutdown() {
+		global $nntp;
+		$nntp->quit();
+	}
+	
+	register_shutdown_function("on_shutdown");
 
 	// Load the newsgroups_list
 	if (!isset($_SESSION["newsgroups_list"])) {	// Need to update the newsgroups_list first

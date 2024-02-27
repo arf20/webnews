@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	This PHP script is licensed under the GPL
 
@@ -38,12 +38,12 @@
 
 	ob_clean();
 	header("Content-Type: application/xml");
-	echo '<?xml version="1.0" encoding="ISO-8859-1" ?>'."\n";
+	echo '<?phpxml version="1.0" encoding="ISO-8859-1" ?>'."\n";
 ?>
 <rss version="2.0">
 	<channel>
-		<title><? echo $_SESSION["newsgroup"]; ?></title>
-<?
+		<title><?php echo $_SESSION["newsgroup"]; ?></title>
+<?php
 		echo "<description>".$messages_ini["text"]["newsgroup"]." ".$_SESSION["newsgroup"];
 		$desc = $nntp->get_groups_description($_SESSION["newsgroup"]);
 		if (sizeof($desc) > 0) {
@@ -53,8 +53,8 @@
 		// Quit sooner to release resources
 		$nntp->quit();
 ?>
-		<link><? echo construct_url("newsgroups.php?group=".urlencode($_SESSION["newsgroup"])); ?></link>
-<?
+		<link><?php echo construct_url("newsgroups.php?group=".urlencode($_SESSION["newsgroup"])); ?></link>
+<?php
 		echo "<lastBuildDate>".date("D, d M Y H:i:s O", time())."</lastBuildDate>";
 ?>
 		<generator>Web-News v.1.6.3 (NNTP to RSS Engine)</generator> 
@@ -66,7 +66,7 @@
 			<height>40</height>
 			<description>RSS feed provided by Web-News v.1.6.3 (NNTP to RSS Engine)</description>
 		</image>
-<?
+<?php
 	foreach ($message_summary as $mid=>$message) {
 		echo "<item>\n";
 		echo "<title>";
@@ -100,7 +100,7 @@
 	</channel>
 </rss>
 
-<?
+<?php
 	exit(0);
 
 	// Compare function for sorting message by date in ascending order

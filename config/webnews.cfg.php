@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	Web-News v.1.6.3 NNTP<->WWW gateway
 	
@@ -14,7 +14,7 @@
 /*	This part configurate the server settings                     */
 /******************************************************************/
 	// NNTP Server setting
-	$nntp_server = "news.csis.hku.hk";
+	$nntp_server = "misc.lan";
 	$user = "";
 	$pass = "";
 	
@@ -29,8 +29,8 @@
 	$session_name = "webnews";
 
 	// List of subscribed newsgroups
-	$newsgroups_list = array("hku.cs.test", "hku.cc.test", "comp.lang.*", "tw.bbs.comp.linux");
-	$default_group = "comp.lang.c";
+	$newsgroups_list = array("arfnet.announce", "arfnet.general", "arfnet.test");
+	$default_group = "arfnet.announce";
 
 
 /******************************************************************/

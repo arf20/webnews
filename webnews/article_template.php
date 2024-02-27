@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	This PHP script is licensed under the GPL
 	
@@ -17,16 +17,16 @@
 	}
 ?>
 
-<font face="<? echo $font_family; ?>">
+<font face="<?php echo $font_family; ?>">
 <table cellpadding="5" cellspacing="0" border="0" align="left" width="100%">
 	<tr>
-		<td bgcolor="<? echo $primary_color; ?>" width="15%" valign="top"><font size="<? echo $font_size; ?>"><b><? echo $messages_ini["text"]["subject"]; ?></b></font></td>
-		<td bgcolor="<? echo $secondary_color; ?>"><font size="<? echo $font_size; ?>"><? echo htmlescape($header["subject"]);?></td>
+		<td bgcolor="<?php echo $primary_color; ?>" width="15%" valign="top"><font size="<?php echo $font_size; ?>"><b><?php echo $messages_ini["text"]["subject"]; ?></b></font></td>
+		<td bgcolor="<?php echo $secondary_color; ?>"><font size="<?php echo $font_size; ?>"><?php echo htmlescape($header["subject"]);?></td>
 	</tr>
 	<tr>
-		<td bgcolor="<? echo $primary_color; ?>" width="15%" valign="top"><font size="<? echo $font_size; ?>"><b><? echo $messages_ini["text"]["from"]; ?></b></font></td>
-		<td bgcolor="<? echo $secondary_color; ?>"><font size="<? echo $font_size; ?>">
-<?
+		<td bgcolor="<?php echo $primary_color; ?>" width="15%" valign="top"><font size="<?php echo $font_size; ?>"><b><?php echo $messages_ini["text"]["from"]; ?></b></font></td>
+		<td bgcolor="<?php echo $secondary_color; ?>"><font size="<?php echo $font_size; ?>">
+<?php
 		if (is_requested("post") || $_SESSION["auth"]) {
 			echo "<a href=\"mailto:".htmlescape($header["from"]["email"])."\">";
 		}
@@ -39,20 +39,20 @@
 		</td>
 	</tr>
 	<tr>
-		<td bgcolor="<? echo $primary_color; ?>" width="15%" valign="top"><font size="<? echo $font_size; ?>"><b><? echo $messages_ini["text"]["date"]; ?></b></font></td>
-		<td bgcolor="<? echo $secondary_color; ?>"><font size="<? echo $font_size; ?>"><? echo $header["date"]; ?></td>
+		<td bgcolor="<?php echo $primary_color; ?>" width="15%" valign="top"><font size="<?php echo $font_size; ?>"><b><?php echo $messages_ini["text"]["date"]; ?></b></font></td>
+		<td bgcolor="<?php echo $secondary_color; ?>"><font size="<?php echo $font_size; ?>"><?php echo $header["date"]; ?></td>
 	</tr>
 	<tr>
-		<td bgcolor="<? echo $primary_color; ?>" width="15%" valign="top"><font size="<? echo $font_size; ?>"><b><? echo $messages_ini["text"]["newsgroups"]; ?></b></font></td>
-		<td bgcolor="<? echo $secondary_color; ?>"><font size="<? echo $font_size; ?>"><? echo $header["newsgroups"]; ?></td>
+		<td bgcolor="<?php echo $primary_color; ?>" width="15%" valign="top"><font size="<?php echo $font_size; ?>"><b><?php echo $messages_ini["text"]["newsgroups"]; ?></b></font></td>
+		<td bgcolor="<?php echo $secondary_color; ?>"><font size="<?php echo $font_size; ?>"><?php echo $header["newsgroups"]; ?></td>
 	</tr>
 <!--
 	<tr>
-		<td bgcolor="<? echo $primary_color; ?>" width="15%" valign="top"><font size="<? echo $font_size; ?>"><b>Content-Type</b></font></td>
-		<td bgcolor="<? echo $secondary_color; ?>"><font size="<? echo $font_size; ?>"><? echo $header["content-type"]; ?></td>
+		<td bgcolor="<?php echo $primary_color; ?>" width="15%" valign="top"><font size="<?php echo $font_size; ?>"><b>Content-Type</b></font></td>
+		<td bgcolor="<?php echo $secondary_color; ?>"><font size="<?php echo $font_size; ?>"><?php echo $header["content-type"]; ?></td>
 	</tr>
 -->
-<?
+<?php
 	if (sizeof($parts) > 1) {	// We've got attachment
 		echo "<tr>\r\n";
 		echo "<td bgcolor=\"$primary_color\" width=\"15%\" valign=\"top\"><font size=\"$font_size\"><b>".$messages_ini["text"]["attachments"]."</b></font></td>\r\n";
@@ -118,19 +118,19 @@
 <tr><td colspan=2">
 <table cellpadding="0" cellspacing="1" border="0" align="left" width="100%">
 <tr>
-    <td colspan="3" bgcolor="<? echo $primary_color;?>"><b><font size="<? echo $font_size;?>">
-        <? echo $messages_ini["text"]["recent_thread"];?>
+    <td colspan="3" bgcolor="<?php echo $primary_color;?>"><b><font size="<?php echo $font_size;?>">
+        <?php echo $messages_ini["text"]["recent_thread"];?>
     </font></b></td>    
 </tr>
 <tr>
-    <td><font size="<? echo ($font_size - 1);?>">&nbsp;</font></td>
+    <td><font size="<?php echo ($font_size - 1);?>">&nbsp;</font></td>
 </tr>
-<?
+<?php
         display_tree($message_node->get_children(), 0, "", FALSE, $article_id);
 ?>
 </table>
 </td></tr>
-<?
+<?php
     }
 ?>
 </table>

@@ -1,4 +1,4 @@
-<?
+<?php
 /*
 	This PHP script is licensed under the GPL
 
@@ -50,7 +50,8 @@
 		var $error_message;
 		
 		
-		function NNTP($server, $user = "", $pass = "", $proxy_server = "", $proxy_port = "", $proxy_user = "", $proxy_pass = "") {
+		//function NNTP($server, $user = "", $pass = "", $proxy_server = "", $proxy_port = "", $proxy_user = "", $proxy_pass = "") {
+		function __construct($server, $user = "", $pass = "", $proxy_server = "", $proxy_port = "", $proxy_user = "", $proxy_pass = "") {
 			$this->server = $server;
 			$this->user = $user;
 			$this->pass = $pass;
@@ -80,6 +81,8 @@
 				$this->nntp = fsockopen($this->proxy_server, $this->proxy_port, $this->error_number, $this->error_message);
 			} else {
 				$this->nntp = fsockopen($this->server, NNTP_PORT, $this->error_number, $this->error_message);
+				//$this->nntp = fsockopen("news.arf20.com", 119, $this->error_number, $this->error_message);
+				//if (!$this->nntp) print("fsockopen failed for " . $this->server . ": " . $this->error_message);
 			}
 			
 			if ($this->nntp) {
@@ -347,10 +350,10 @@
 		// Get a tree structure with the $message_id is one of the children
 		// $message_id here is the Message-ID field
 		function get_message_thread($start_id, $end_id, $root_ref) {
-		    if (!$root_ref) {
-		        return NULL;
-		    }
-		    
+			if (!$root_ref) {
+		           return NULL;
+		        }
+			
 			$buf = $this->send_request("xover ".$start_id."-".$end_id);
 			$response = $this->parse_response($buf);
 			$thread_root = new MessageTreeNode(NULL);
@@ -532,7 +535,7 @@
 		var $children;
 		var $show_children;
 		
-		function MessageTreeNode($message_info) {
+		function __construct($message_info) {
 			$this->message_info = $message_info;
 			$this->children = array();
 			$this->show_children = FALSE;
@@ -576,11 +579,11 @@
 		
 		
 		function &get_child($key) {
+			$t = null;
 			if (isset($this->children[$key])) {
-				return $this->children[$key];
-			} else {
-				return NULL;
-			}
+				$t = $this->children[$key];
+			} 
+			return $t;
 		}
 		
 		
@@ -590,6 +593,7 @@
 
 
 		function get_children_keys() {
+			//if ($this->children == null) return null;
 			return array_keys($this->children);
 		}
 		
